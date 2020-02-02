@@ -1,0 +1,70 @@
+\subsection{Your Q\&A}
+
+\begin{frame}
+\frametitle{Licenses}
+   \begin{itemize}
+      \item[Question:] One license file for multiple packages in the layer: The best way to achieve this?
+      \item Hint: Check how poky does it
+      \item \code{ls ./poky/meta/files/common-licenses/}
+      \item \code{LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"}
+      \item I have also read something like this:
+      \item \code{LICENSE_PATH += "${LAYERDIR}/custom-layer/files/additional-licenses"}
+   \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Licenses}
+  \begin{itemize}
+     \item[Question:] What does LICENSE = "CLOSED" mean for the user of the layer?
+        I understand that LICENSE = "CLOSED" enters a special case where the
+        license does not neew to be included (no LIC\_FILES\_CHECKSUM needed). I
+        could not find anything more about LICENSE = "CLOSED", not even in the
+        Mega Manual. With my setup, I did not need to accept/enable the CLOSED
+        licenses. From this I would say LICENSE = "CLOSED" makes the packages
+        legally unusable with no warnings shown to the user.
+     \item I don't know. Sorry!
+     \item The only thing i found was that it might be needed to install binaries on the target.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Toolchain}
+   \begin{itemize}
+      \item[Question:] Enabling Fortran compiler within a layer. I have found an option to
+        enable it in the user's config file, but it will be nicer if the
+        compiler is enabled from inside the layer, so the user does not need
+        to change the general configuration.
+      \item Should become part of the Distro config. Something for the practical part?
+   \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Package Updates (1/2)}
+   \begin{itemize}
+      \item[Question:] Not clear: How are the packages updated (build-time). E.g. we use
+        Yocto Rocko which has Python 3.5.x. How do we update to Python 3.6.y?
+        If we continue using the Rocko branch, will the Python be updated
+        eventually, or we need to change the Yocto branches to get the updates?
+   \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Package Updates (1/2)}
+   \begin{itemize}
+     \item inside your distro config \code{PREFERRED_VERSION_python3 = “3.6.y”}
+     \item if version is not yet available you have several options
+        \begin{itemize}
+           \item (for easy pacakges with few dependencies) use
+              \code{devtool upgrade-recipe -V <version-of-your-choice> python}
+           \item (for bigger packages like python ;) \\
+         		get next poky version, try to extract recipes from there and put them into your own layer
+           \item consider using a complete new version of poky
+           \item go and develop the recipes (or even whole distribution) yourself
+
+   	you sohuld really ask yourself why youwant to do this and if you’re able to maintain it. Keeping different versions of packages compatible to other system packages can become very high maintenance!
+   Usually you should try to stick to one fixed version of poky and work with it. If you feel the need for newer package versions during your development phase, try to switch the whole poky. ATTENTION not all layers might be compatible!
+      \end{itemize}
+   \end{itemize}
+\end{frame}
+
+

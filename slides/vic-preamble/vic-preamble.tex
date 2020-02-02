@@ -1,0 +1,37 @@
+\subsection{Preface}
+
+\begin{frame}
+\frametitle{Preconditions}
+  \begin{itemize}
+     \item You should have basic knowledge about Yocto, bitbake and it's concepts
+     \item If anything might be unclear during the presentation, don't hesitate to ask
+     \item If anything is to boring, please tell me so we can skip forward
+     \item Most important part is your contribution. especially during the practical part
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{What are we talking about?}
+  \begin{itemize}
+     \item You're project is pretty close to Hardware.
+     \item You decided to use yocto as base for your work.
+     \item Where to put all the stuff you developed?
+     \item Time flies and during the project you need to modify stuff that usually comes from poky or open embedded itself
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Basic rules}
+  \begin{itemize}
+     \item All modifications are made in \textbf{your} {\em meta-<project-bsp>} layer.
+     \item Editing Poky is a \textbf{no-go}!
+     \item \code{build/conf/local.conf} should be your scratchboard only
+     \item Distinguish between \code{distro}, \code{machine} and \code{image}
+     \item Remember: conf is global, recipe is local
+     \item Recommendation: separate BSP-, Distro- and Application- Layer
+        \begin{itemize}
+           \item {\em for smaller projects (most often) you can at least combine BSP- and Distor- Layer}
+        \end{itemize}
+  \end{itemize}
+\end{frame}
+
